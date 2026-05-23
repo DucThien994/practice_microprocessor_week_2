@@ -34,34 +34,34 @@ $(wildcard ../makefile.init) \
 $(wildcard ../makefile.targets) \
 
 
-BUILD_ARTIFACT_NAME := tuan2
+BUILD_ARTIFACT_NAME := tuan3
 BUILD_ARTIFACT_EXTENSION := elf
 BUILD_ARTIFACT_PREFIX :=
 BUILD_ARTIFACT := $(BUILD_ARTIFACT_PREFIX)$(BUILD_ARTIFACT_NAME)$(if $(BUILD_ARTIFACT_EXTENSION),.$(BUILD_ARTIFACT_EXTENSION),)
 
 # Add inputs and outputs from these tool invocations to the build variables 
 EXECUTABLES += \
-tuan2.elf \
+tuan3.elf \
 
 MAP_FILES += \
-tuan2.map \
+tuan3.map \
 
 SIZE_OUTPUT += \
 default.size.stdout \
 
 OBJDUMP_LIST += \
-tuan2.list \
+tuan3.list \
 
 
 # All Target
 all: main-build
 
 # Main-build Target
-main-build: tuan2.elf secondary-outputs
+main-build: tuan3.elf secondary-outputs
 
 # Tool invocations
-tuan2.elf tuan2.map: $(OBJS) $(USER_OBJS) D:\File_For_Coding\IMIC_TECH\Embedded_System\STM32F411VET6-PROJECT\tuan2\STM32F407VETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "tuan2.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"D:\File_For_Coding\IMIC_TECH\Embedded_System\STM32F411VET6-PROJECT\tuan2\STM32F407VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="tuan2.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+tuan3.elf tuan3.map: $(OBJS) $(USER_OBJS) D:\File_For_Coding\IMIC_TECH\Embedded_System\STM32F411VET6-PROJECT\tuan3\STM32F407VETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "tuan3.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"D:\File_For_Coding\IMIC_TECH\Embedded_System\STM32F411VET6-PROJECT\tuan3\STM32F407VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="tuan3.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -70,14 +70,14 @@ default.size.stdout: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
 	@echo 'Finished building: $@'
 	@echo ' '
 
-tuan2.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "tuan2.list"
+tuan3.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "tuan3.list"
 	@echo 'Finished building: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) default.size.stdout tuan2.elf tuan2.list tuan2.map
+	-$(RM) default.size.stdout tuan3.elf tuan3.list tuan3.map
 	-@echo ' '
 
 secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST)
