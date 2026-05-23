@@ -55,31 +55,29 @@ void Timer2_Init(void)
 void TIM2_IRQHandler(void)
 {
 
-    if (TIM2->SR & TIM_SR_UIF)
+  if (TIM2->SR & TIM_SR_UIF)
+  {
+    TIM2->SR &= ~TIM_SR_UIF;
+    if (count_mode == 1)
     {
-        TIM2->SR &= ~TIM_SR_UIF;
-
-
-        if (count_mode == 1)
-        {
-            counter_2digits++;
-            if (counter_2digits > 99)
-            {
-                counter_2digits = 0;
-            }
-        }
-        else if (count_mode == 2)
-        {
-            if (counter_2digits == 0)
-            {
-                counter_2digits = 99;
-            }
-            else
-            {
-                counter_2digits--;
-            }
-        }
+      counter_2digits++;
+      if (counter_2digits > 99)
+      {
+        counter_2digits = 0;
+      }
     }
+    else if (count_mode == 2)
+    {
+      if (counter_2digits == 0)
+      {
+        counter_2digits = 99;
+      }
+      else
+      {
+        counter_2digits--;
+      }
+    }
+  }
 }
 
 void PB3sendPulse(void)
